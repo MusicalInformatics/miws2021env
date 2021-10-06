@@ -1,0 +1,24 @@
+name: miws2021
+
+channels:
+  - anaconda
+  - pytorch
+  - defaults
+
+dependencies:
+  - python=3.7
+  - Cython
+  - matplotlib
+  - numpy
+  - pytorch
+  - scipy
+  - tqdm
+  - pip
+  - scikit-learn
+  - jupyter
+  - ipython
+
+  - pip:
+    - mido
+    - python-rtmidi
+    - partitura
