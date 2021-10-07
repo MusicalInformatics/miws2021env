@@ -4,7 +4,7 @@
 
 1. Go to anaconda.com and download the miniconda (or anaconda, if you prefer) in version compatible with the system your running. You can choose any python version you like, for this course we use 3.7. 
 2. Install this software which gives you at least two things: the command-line python package manager ```conda``` (similar to the python package manager ```pip```) and the conda environment management system. Conda environments allow you to create virtual python environments with their own python interpreter and installed packages.
-3. In the repository __insert link__ you find a file called ```environment.yml``` which contains a list of dependencies that we use regularly.
+3. In this repository you find a file called ```environment.yml``` which contains a list of dependencies that we use regularly.
 4. Create a conda environment with __your_environment_name__ from this file by executing
 ```
 conda env -n your_environment_name -f path/to/environmnent.yml
@@ -22,5 +22,5 @@ conda activate your_environment_name
 
 ## Getting started with the first notebook
 
-Make sure to change current directory to this repository on your machine (```cd path/to/rep```) , type ```jupyter notebook``` in your terminal (with activated conda environment) and hit Enter. This will start a jupyter server serving at a link displayed in the terminal. If a browser didn't automatically open, follow the link. In the browser windows you see a an overview of the current directory. Click on intro_to_partitura.ipynb to open the starting notebook...
+Make sure to change current directory to this repository on your machine (```cd path/to/repo```) , type ```jupyter notebook``` in your terminal (with activated conda environment) and hit Enter. This will start a jupyter server serving at a link displayed in the terminal. If a browser didn't automatically open, follow the link. In the browser windows you see a an overview of the current directory. Click on intro_to_partitura.ipynb to open the starting notebook...
 
