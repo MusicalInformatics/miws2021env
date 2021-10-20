@@ -7,6 +7,7 @@ import numpy as np
 from music_alignment.cy_dtw import _dtw, get_full_window
 from utils import euclidean
 
+
 def dynamic_time_warping(X, Y, metric=euclidean, window=None):
     """
     Dynamic Time Warping
@@ -34,28 +35,10 @@ def dynamic_time_warping(X, Y, metric=euclidean, window=None):
     """
     if window is None:
         window = get_full_window(len(X), len(Y))
-        
+
     X, Y = np.atleast_2d(X, Y)
     path, dtwdist = _dtw(X=X, Y=Y,
                          local_distance=metric,
                          window=window)
 
-    return np.array(path[::-1]), dtwdist
-
-
-if __name__ == "__main__":
-    from fastdtw import dtw
-    import time
-    x = np.random.randn(100, 7)
-    y = np.random.randn(120, 7)
-
-    start = time.time()
-    fout = dtw(x, y, euclidean)
-    end = time.time() - start
-
-    print(end - start)
-
-    start = time.time()
-    cout = dynamic_time_warping(x, y)
-    end = time.time() - start
-    print(end - start)
+    return np.array(path[::-1], dtype=int), dtwdist
