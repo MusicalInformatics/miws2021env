@@ -11,12 +11,10 @@ extensions = [
               ["utils/distances.pyx"],
               include_dirs=include_dirs,
     ),
-    # Extension("matchmaker.alignment.offline.dtw",
-    #           ["matchmaker/alignment/offline/dtw.pyx"],
-    #           include_dirs=include_dirs,
-    #           # extra_compile_args=['-fopenmp'],
-    #           # extra_link_args=['-fopenmp'],
-    #           )
+    Extension("music_alignment.cy_dtw",
+              ["music_alignment/cy_dtw.pyx"],
+              include_dirs=include_dirs,
+              )
 ]
 
 
@@ -37,5 +35,4 @@ setup(
         extensions,
         language_level=3
     ),                 
-    # include_dirs=[numpy.get_include()],
 )

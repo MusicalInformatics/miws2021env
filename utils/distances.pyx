@@ -245,7 +245,8 @@ cdef class Linf(Metric):
             diff[i] = abs(X[i] - Y[i])
         return cy_max(diff)
 
-
+@cython.boundscheck(False)
+@cython.wraparound(False)
 cdef double cy_max(double[:] x):
     cdef double out = -INFINITY
     cdef Py_ssize_t i
@@ -256,6 +257,22 @@ cdef double cy_max(double[:] x):
             out = x[i]
     return out
 
+@cython.boundscheck(False)
+@cython.wraparound(False)
+cdef (int, double) cy_argmax(double[:] x):
+    cdef double out = -INFINITY
+    cdef Py_ssize_t i
+    cdef int argmax = 0
+    cdef Py_ssize_t N = x.shape[0]
+
+    for i in range(N):
+        if x[i] > out:
+            out = x[i]
+            argmax = i
+    return argmax, out
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
 cdef double cy_min(double[:] x):
     cdef double out = INFINITY
     cdef Py_ssize_t i
@@ -265,3 +282,20 @@ cdef double cy_min(double[:] x):
         if x[i] < out:
             out = x[i]
     return out
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+cdef (int, double) cy_argmin(double[:] x):
+    """
+    Fast argmin
+    """
+    cdef double out = INFINITY
+    cdef Py_ssize_t i
+    cdef int argmin = 0
+    cdef Py_ssize_t N = x.shape[0]
+
+    for i in range(N):
+        if x[i] < out:
+            out = x[i]
+            argmin = i
+    return argmin, out
