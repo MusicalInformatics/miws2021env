@@ -11,8 +11,8 @@ extensions = [
               ["utils/distances.pyx"],
               include_dirs=include_dirs,
     ),
-    Extension("music_alignment.cy_dtw",
-              ["music_alignment/cy_dtw.pyx"],
+    Extension("alignment.cy_dtw",
+              ["alignment/cy_dtw.pyx"],
               include_dirs=include_dirs,
               )
 ]
