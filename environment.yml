@@ -17,6 +17,8 @@ dependencies:
   - scikit-learn
   - jupyter
   - ipython
+  - pandas
+
 
   - pip:
     - mido
