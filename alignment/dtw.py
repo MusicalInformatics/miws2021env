@@ -4,7 +4,7 @@ Dynamic Time Warping
 """
 import numpy as np
 
-from music_alignment.cy_dtw import _dtw, get_full_window
+from alignment.cy_dtw import _dtw, get_full_window
 from utils import euclidean
 
 
