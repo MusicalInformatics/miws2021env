@@ -71,27 +71,6 @@ class HiddenMarkovModel(object):
             log_probabilities=log_probabilities)
         return best_sequence, sequence_likelihood
 
-    # def __call__(self, input):
-    #     self.forward_algorithm(input)
-    #     return self.current_state
-
-    # def forward_algorithm(self, observation):
-
-    #     # Compute observation probability
-    #     obs_prob = self.observation_model(
-    #         observation=observation, current_state=self.current_state
-    #     )
-    #     # Compute transition probability
-    #     transition_prob = self.transition_model(self.forward_variable)
-
-    #     # Estimate forward variable
-    #     self.forward_variable = obs_prob * transition_prob
-    #     self.forward_variable /= self.forward_variable.sum()
-    #     # keep track for debbuging purposes
-    #     self.forward_variables.append(self.forward_variable)
-
-    #     self.update_state()
-
 
 # alias
 HMM = HiddenMarkovModel
@@ -332,13 +311,3 @@ if __name__ == '__main__':
 
     path, prob = hmm.find_best_sequence(obs, log_probabilities=True)
     print(path, prob)
-
-    # start_p = {"Healthy": 0.6, "Fever": 0.4}
-    # trans_p = {
-    #     "Healthy": {"Healthy": 0.7, "Fever": 0.3},
-    #     "Fever": {"Healthy": 0.4, "Fever": 0.6},
-    # }
-    # emit_p = {
-    #     "Healthy": {"normal": 0.5, "cold": 0.4, "dizzy": 0.1},
-    #     "Fever": {"normal": 0.1, "cold": 0.3, "dizzy": 0.6},
-    # }
