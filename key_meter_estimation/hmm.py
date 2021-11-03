@@ -125,7 +125,6 @@ def viterbi_algorithm(hmm, observations, log_probabilities=True):
     # Viterbi recursion
     for i, obs in enumerate(observations[1:], 1):
         obs_prob = hmm.observation_model(obs)
-        print(obs_prob)
         for j in range(hmm.n_states):
             if log_probabilities:
                 prob, state = max(
