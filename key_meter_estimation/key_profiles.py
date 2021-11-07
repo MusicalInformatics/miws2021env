@@ -8,11 +8,11 @@ from scipy.linalg import circulant
 
 # List of labels for each key (Use enharmonics as needed)
 KEYS = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B",
-        "c","c#","d","d#","e","f","f#","g","g#","a","a#","b"]
+        "Cm","C#m","Dm","D#m","Em","Fm","F#m","Gm","G#m","Am","A#m","Bm"]
 
 MAJOR_KEYS = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"]
 
-MINOR_KEYS = ["c","c#","d","d#","e","f","f#","g","g#","a","a#","b"]
+MINOR_KEYS = ["Cm","C#m","Dm","D#m","Em","Fm","F#m","Gm","G#m","Am","A#m","Am"]
 
 MAJ_min_KEYS = [ky for kk in zip(MAJOR_KEYS,MINOR_KEYS) for ky in kk]
 
