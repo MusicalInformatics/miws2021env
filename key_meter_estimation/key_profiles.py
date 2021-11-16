@@ -7,7 +7,7 @@ from scipy.linalg import circulant
 ### Definitions
 
 # List of labels for each key (Use enharmonics as needed)
-KEYS = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B",
+KEYS = ["C","C#","D","Eb","E","F","Gb","G","Ab","A","Bb","B",
         "Cm","C#m","Dm","D#m","Em","Fm","F#m","Gm","G#m","Am","A#m","Bm"]
 
 MAJOR_KEYS = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"]
