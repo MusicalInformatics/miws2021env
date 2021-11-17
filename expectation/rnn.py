@@ -434,3 +434,17 @@ class RecurrentModel(nn.Module):
         y = y.view(batch_size, seq_len, self.output_size)
 
         return y
+
+def prob_x_given_context(rnn, x, context,
+                         pitch_idxs, dur_idxs):
+    # Assume that batch_size == 1, i.e., there is only one
+    # sequence
+    
+    if isinstance(context, np.ndarray):
+        context = torch.tensor(context).to(rnn.dtype)
+    softmax = nn.SoftMax(dim=0)
+    y = rnn(context)[-1, 1]
+    pitch_prob = softmax(y[pitch_idxs])
+    duration_prob = softmax(y[dur_idxs])
+
+    return pitch_prob, duration_prob
