@@ -177,41 +177,11 @@ def wtc_num_to_key(i):
         wtc_key = KEYS[np.mod(i, 48) // 4 + 12]
     return wtc_key
 
-def key_evaluation(predicted_key, target_key):
-    target_fifths, target_mode = key_name_to_fifths_mode(target_key)
-    pred_fifths, pred_mode = key_name_to_fifths_mode(predicted_key)
 
-    print(target_fifths, pred_fifths)
-    cost = abs(target_fifths - pred_fifths) + float((not target_mode == pred_mode))
-    return cost
+# def key_evaluation(predicted_key, target_key):
+#     target_fifths, target_mode = key_name_to_fifths_mode(target_key)
+#     pred_fifths, pred_mode = key_name_to_fifths_mode(predicted_key)
 
-if __name__ == "__main__":
-    import glob
-    import os
-    from partitura.utils.music import key_name_to_fifths_mode
-    midi_dir = "/Users/carlos/experiment_data/wtc_audio/scores/musicxml/MIDI/"
-
-    midi_files = glob.glob(os.path.join(midi_dir, "*.mid"))
-    midi_files.sort()
-
-    # for i in range(96):
-    #     mode_idx = np.mod(np.mod(i, 48) // 2, 2)
-    #     if mode_idx == 0:
-    #         gt_key = KEYS[np.mod(i, 48) // 4]
-    #     else:
-    #         gt_key = KEYS[np.mod(i, 48) // 4 + 12]
-
-    #     print(i, gt_key)
-    keys = []
-    for i, fn in enumerate(midi_files[:48]):
-
-        gt_key = wtc_num_to_key(i)
-        key, log_lik = key_identification(fn, "cbms")
-        
-        gt_fifths, gt_mode = key_name_to_fifths_mode(gt_key)
-        pred_fifths, pred_mode = key_name_to_fifths_mode(key)
-
-        cost = abs(gt_fifths - pred_fifths) + float((not gt_mode == pred_mode))
-        keys.append((i, key, gt_key, cost))
-    for k in keys:
-        print(k)
+#     print(target_fifths, pred_fifths)
+#     cost = abs(target_fifths - pred_fifths) + float((not target_mode == pred_mode))
+#     return cost

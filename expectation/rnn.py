@@ -448,3 +448,35 @@ def prob_x_given_context(rnn, x, context,
     duration_prob = softmax(y[dur_idxs])
 
     return pitch_prob, duration_prob
+
+
+def prob_x_given_context(rnn, x, context,
+                         pitch_idxs, dur_idxs):
+    # Assume that batch_size == 1, i.e., there is only one
+    # sequence
+    
+    if isinstance(context, np.ndarray):
+        if context.ndim == 2:
+            context = context[np.newaxis, :, :]
+        context = torch.tensor(context).to(rnn.dtype)
+    softmax = nn.Softmax(dim=0)
+    y = rnn(context)[-1, 1]
+    pitch_prob = softmax(y[pitch_idxs]).detach().cpu().numpy()
+    duration_prob = softmax(y[dur_idxs]).detach().cpu().numpy()
+    
+    x_pitch = x[pitch_idxs]
+    x_dur = x[dur_idxs]
+    pp = np.prod((pitch_prob) ** x_pitch * (1 - pitch_prob) ** (1 - x_pitch))
+    dp = np.prod((duration_prob) ** x_dur * (1 - duration_prob) ** (1 - x_dur))
+    p_x_given_contex = pp * dp
+    return p_x_given_contex
+
+
+def find_nearest(array, value):
+    """
+    From https://stackoverflow.com/a/26026189
+    """
+    idx = np.clip(np.searchsorted(array, value, side="left"),
+                  0, len(array) - 1)
+    idx = idx - (np.abs(value - array[idx-1]) < np.abs(value - array[idx]))
+    return idx
