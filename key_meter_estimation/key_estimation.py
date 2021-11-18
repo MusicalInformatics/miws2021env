@@ -176,12 +176,3 @@ def wtc_num_to_key(i):
     else:
         wtc_key = KEYS[np.mod(i, 48) // 4 + 12]
     return wtc_key
-
-
-# def key_evaluation(predicted_key, target_key):
-#     target_fifths, target_mode = key_name_to_fifths_mode(target_key)
-#     pred_fifths, pred_mode = key_name_to_fifths_mode(predicted_key)
-
-#     print(target_fifths, pred_fifths)
-#     cost = abs(target_fifths - pred_fifths) + float((not target_mode == pred_mode))
-#     return cost
