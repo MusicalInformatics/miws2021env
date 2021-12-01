@@ -298,3 +298,66 @@ def synthesize_data(in_fn, out_fn=None,
 
             f.write(audio)
     return audio
+
+def synthesize(pitch, onsets=None, duration=None, 
+               samplerate=SAMPLE_RATE,
+               envelope_fun='linear',
+               m2fq=midinote2freq,
+               harmonic_dist=None):
+
+    """
+    Synthesize_data from part or note array.
+    """
+    
+    if onsets is None:
+        onsets = np.arange(len(pitch))
+    if duration is None:
+        duration = np.ones_like(pitch)
+    offsets = onsets + duration
+
+    piece_duration = offsets.max()
+
+    # Number of frames
+    num_frames = int(np.round(piece_duration * samplerate))
+
+    # Initialize array containing audio
+    audio = np.zeros(num_frames, dtype='float')
+
+    # Initialize the time axis
+    x = np.linspace(0, piece_duration, num=num_frames)
+
+    # onsets in frames (i.e., indices of the `audio` array)
+    onsets_in_frames = np.digitize(onsets, x)
+
+    # frequency of the note in herz
+    
+    freq_in_hz = m2fq(pitch)
+
+    if harmonic_dist is None:
+        def harmonic_dist(x): return x, 1
+
+    elif isinstance(harmonic_dist, int):
+
+        harmonic_dist = DistributedHarmonics(harmonic_dist)
+
+    for (f, oif, dur) in zip(freq_in_hz, onsets_in_frames, duration):
+
+        freqs, weights = harmonic_dist(f)
+
+        note = additive_synthesis(freqs=freqs,
+                                  duration=dur,
+                                  samplerate=samplerate,
+                                  weights=weights,
+                                  envelope_fun=envelope_fun)
+        idx = slice(oif, oif + len(note))
+
+        audio[idx] += note
+
+    # normalization term
+    # TODO: Non-linear normalization?
+    norm_term = max(audio.max(), abs(audio.min()))
+
+    # normalize audio
+    audio /= norm_term
+    
+    return audio
