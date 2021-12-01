@@ -13,9 +13,9 @@ import partitura
 LOGGER = logging.getLogger(__name__)
 
 
-def load_data(min_seq_length=10):
+def load_data(min_seq_length=10, directory = "data"):
     # load data
-    files = glob.glob(os.path.join("data", "*.mid"))
+    files = glob.glob(os.path.join(directory, "*.mid"))
     files.sort()
     sequences = []
     for fn in files:
